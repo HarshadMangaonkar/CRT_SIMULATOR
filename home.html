@@ -1,39 +1,130 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>
-            CRT Oscilloscope Simulation
-        </title>
-    </head>
-    <body>
-    <header>
-        <h1>Virtual CRT Oscilloscope</h1>
-        <nav>
-            <a href="#about">About</a>
-            <a href="#features">Features</a>
-        </nav>  
-    </header>
-    <section class="start"> 
-        <h2>Welcome to the Virtual CRT Oscilloscope Simulator</h2>
-        <p>Explore the fundamentals of CRT oscilloscopes through this interactive web-based simulation. Adjust parameters, visualize waveforms, and understand the principles behind electron beam deflection and signal representation.</p>
-        <a href="lab.html">Start the program</a>
-    </section>
+<head>
+<title>CRT Oscilloscope Simulation</title>
 
-    <section id="about" class="section">
-        <h3>About the project</h3>
-        <p>A Cathode Ray Tube (CRT) oscilloscope helps students understand signal visualization, electron emission, focusing, and deflection. Since real CRTs are outdated, fragile, and rarely available, students often learn only the theory. A Virtual CRT Oscilloscope Simulator visually demonstrates beam movement, deflection, and waveform formation using web technologies, making learning interactive, safe, and easier without real hardware.</p>
-    </section>
+<style>
+body{
+  margin:0;
+  font-family:Arial, sans-serif;
+  background:#f4f6fb;
+  color:#333;
+}
 
-    <section id="features" class="section">
-  <h3>Main Features</h3>
-  <p>
-    • Real-time electron beam animation<br>
-    • Adjustable beam speed & intensity<br>
-    • Magnetic & electric deflection controls<br>
-    • Realistic physics-based simulation<br>
-    • Built using HTML, CSS & JavaScript
-  </p>
-    </section> 
-    </body>
+/* HEADER */
+header{
+  background:#2563eb;
+  color:white;
+  padding:20px 0;
+  text-align:center;
+  box-shadow:0 2px 8px rgba(0,0,0,0.1);
+}
 
+nav{
+  margin-top:8px;
+}
+
+nav a{
+  color:white;
+  text-decoration:none;
+  margin:0 15px;
+  font-weight:600;
+  padding:6px 10px;
+  border-radius:6px;
+}
+
+nav a:hover{
+  background:rgba(255,255,255,0.2);
+}
+
+/* MAIN CONTAINER */
+.container{
+  width:800px;
+  margin:30px auto;
+}
+
+/* CARD STYLE */
+.card{
+  background:white;
+  padding:25px;
+  border-radius:12px;
+  margin-bottom:25px;
+  box-shadow:0 4px 12px rgba(0,0,0,0.08);
+  text-align:center;
+}
+
+.card h2, .card h3{
+  margin-top:0;
+}
+
+/* BUTTON */
+.start-btn{
+  display:inline-block;
+  margin-top:15px;
+  padding:10px 22px;
+  background:#2563eb;
+  color:white;
+  text-decoration:none;
+  border-radius:8px;
+  font-weight:bold;
+}
+
+.start-btn:hover{
+  background:#1e4ed8;
+}
+
+/* FEATURES LIST */
+.features{
+  text-align:left;
+  line-height:1.8;
+  max-width:400px;
+  margin:15px auto 0;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>Virtual CRT Oscilloscope</h1>
+  <nav>
+    <a href="#about">About</a>
+    <a href="#features">Features</a>
+  </nav>
+</header>
+
+<div class="container">
+
+  <div class="card">
+    <h2>Welcome to the Virtual CRT Oscilloscope Simulator</h2>
+    <p>
+      Explore the fundamentals of CRT oscilloscopes through an interactive simulation.
+      Adjust parameters, visualize waveforms, and understand electron beam deflection.
+    </p>
+    <a class="start-btn" href="lab.html">Start the Program</a>
+  </div>
+
+  <div id="about" class="card">
+    <h3>About the Project</h3>
+    <p>
+      A Cathode Ray Tube (CRT) oscilloscope helps students understand signal visualization,
+      electron emission, focusing, and deflection. Since real CRTs are outdated and fragile,
+      this virtual simulator provides a safe and interactive learning experience using web technology.
+    </p>
+  </div>
+
+  <div id="features" class="card">
+    <h3>Main Features</h3>
+    <div class="features">
+      • Real-time electron beam animation<br>
+      • Adjustable beam speed & intensity<br>
+      • Magnetic & electric deflection controls<br>
+      • Realistic physics-based simulation<br>
+      • Built using HTML, CSS & JavaScript
+    </div>
+  </div>
+
+</div>
+
+</body>
 </html>

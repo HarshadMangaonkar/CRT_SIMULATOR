@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>CRT Oscilloscope Lab</title>
+
+<style>
+body{
+  margin:0;
+  font-family:Arial;
+  background:#f4f6fb;
+}
+
+/* NAVBAR */
+nav{
+  width:300px;
+  margin:20px auto;
+  background:#2563eb;
+  padding:12px;
+  border-radius:12px;
+  display:flex;
+  justify-content:center;
+  gap:20px;
+}
+nav a{
+  color:white;
+  text-decoration:none;
+  font-weight:bold;
+}
+
+/* APP BOX */
+.app{
+  width:1000px;
+  margin:auto;
+  background:white;
+  padding:15px;
+  border-radius:12px;
+  box-shadow:0 6px 20px rgba(0,0,0,0.1);
+}
+
+.row{
+  display:flex;
+  gap:15px;
+}
+
+canvas{
+  background:#eef3ff;
+  border-radius:12px;
+  border:2px solid #ccc;
+}
+
+.controls{
+  width:260px;
+  padding:12px;
+  background:#f1f5ff;
+  border-radius:10px;
+}
+
+button{
+  width:100%;
+  padding:8px;
+  margin-top:10px;
+  border:none;
+  border-radius:6px;
+  background:#2563eb;
+  color:white;
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+  <a href="home.html">Home</a>
+  <a href="theory.html">Theory</a>
+</nav>
+
+<div class="app">
+<h2>CRT Oscilloscope Simulation</h2>
+
+<div class="row">
+<canvas id="crt" width="700" height="450"></canvas>
+
+<div class="controls">
+<label>Magnetic Field</label>
+<input id="bRange" type="range" min="-4" max="4" step="0.1" value="0.6">
+<div>B = <span id="bVal">0.6</span></div>
+
+<label>Beam Speed</label>
+<input id="speedRange" type="range" min="100" max="600" step="10" value="320">
+<div>Speed = <span id="speedVal">320</span></div>
+
+<label>Emission Rate</label>
+<input id="rateRange" type="range" min="10" max="200" step="10" value="80">
+<div>Rate = <span id="rateVal">80</span></div>
+
+<button id="startBtn">Start</button>
+<button id="stopBtn">Stop</button>
+<button id="resetBtn">Reset</button>
+</div>
+</div>
+</div>
+
+<script>
+
+/* ===== GET CANVAS ===== */
+let canvas = document.getElementById("crt");
+let ctx = canvas.getContext("2d");
+
+let W = canvas.width;
+let H = canvas.height;
+
+/* ===== DEVICE POSITIONS ===== */
+let gunX = 90;
+let gunY = H/2;
+
+let platesX = 200;
+let screenX = W - 40;
+
+/* ===== VALUES ===== */
+let B = 0.6;
+let speed = 320;
+let rate = 80;
+let running = true;
+
+/* ===== PARTICLE LIST ===== */
+let particles = [];
+
+/* ===== CONTROLS ===== */
+bRange.oninput = function(e){
+  B = Number(e.target.value);
+  bVal.textContent = B;
+};
+
+speedRange.oninput = function(e){
+  speed = Number(e.target.value);
+  speedVal.textContent = speed;
+};
+
+rateRange.oninput = function(e){
+  rate = Number(e.target.value);
+  rateVal.textContent = rate;
+};
+
+startBtn.onclick = function(){ running = true; };
+stopBtn.onclick = function(){ running = false; };
+resetBtn.onclick = function(){ particles = []; };
+
+/* ===== CREATE ELECTRON ===== */
+function createParticle(){
+  let p = {
+    x: gunX,
+    y: gunY,
+    vx: speed,
+    vy: 0
+  };
+  particles.push(p);
+}
+
+/* ===== MOVE ELECTRON ===== */
+function updateParticle(p, dt){
+
+  // apply deflection between plates
+  if(p.x > platesX && p.x < platesX + 120){
+    p.vy = p.vy - p.vx * B * dt;
+  }
+
+  p.x = p.x + p.vx * dt;
+  p.y = p.y + p.vy * dt;
+}
+
+/* ===== DRAW TUBE ===== */
+function drawTube(){
+  let neckEnd = platesX + 10;
+
+  ctx.beginPath();
+  ctx.moveTo(30, H/2 - 30);
+  ctx.lineTo(neckEnd, H/2 - 30);
+
+  ctx.quadraticCurveTo(screenX - 120, H/2 - 140, screenX + 20, H/2 - 150);
+  ctx.quadraticCurveTo(screenX + 50, H/2, screenX + 20, H/2 + 150);
+  ctx.quadraticCurveTo(screenX - 120, H/2 + 140, neckEnd, H/2 + 30);
+
+  ctx.lineTo(30, H/2 + 30);
+  ctx.closePath();
+
+  ctx.strokeStyle = "gray";
+  ctx.lineWidth = 2;
+  ctx.stroke();
+}
+
+/* ===== DRAW GUN ===== */
+function drawGun(){
+  ctx.beginPath();
+  ctx.arc(gunX, gunY, 5, 0, Math.PI*2);
+  ctx.fillStyle = "red";
+  ctx.fill();
+}
+
+/* ===== DRAW PLATES ===== */
+function drawPlates(){
+  ctx.fillStyle = "#444";
+  ctx.fillRect(platesX + 10, H/2 - 22, 100, 6);
+  ctx.fillRect(platesX + 10, H/2 + 16, 100, 6);
+}
+
+/* ===== DRAW SCREEN ===== */
+function drawScreen(){
+  ctx.beginPath();
+  ctx.arc(screenX, H/2, 150, Math.PI/2, -Math.PI/2, true);
+  ctx.strokeStyle = "#2563eb";
+  ctx.lineWidth = 3;
+  ctx.stroke();
+}
+
+/* ===== DRAW ELECTRONS ===== */
+function drawParticles(){
+
+  // clip inside tube
+  ctx.save();
+  drawTube();
+  ctx.clip();
+
+  for(let i=0; i<particles.length; i++){
+    let p = particles[i];
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, 2, 0, Math.PI*2);
+    ctx.fillStyle = "black";
+    ctx.fill();
+  }
+
+  ctx.restore();
+}
+
+/* ===== DRAW EVERYTHING ===== */
+function render(){
+  ctx.clearRect(0,0,W,H);
+  drawTube();
+  drawGun();
+  drawPlates();
+  drawScreen();
+  drawParticles();
+}
+
+/* ===== MAIN LOOP ===== */
+let lastTime = performance.now();
+let emitCounter = 0;
+
+function loop(now){
+
+  let dt = (now - lastTime)/1000;
+  lastTime = now;
+
+  if(running){
+
+    emitCounter = emitCounter + dt * rate;
+
+    while(emitCounter > 1){
+      createParticle();
+      emitCounter--;
+    }
+
+    for(let i = particles.length-1; i>=0; i--){
+      updateParticle(particles[i], dt);
+
+      if(particles[i].x > screenX){
+        particles.splice(i,1);
+      }
+    }
+  }
+
+  render();
+  requestAnimationFrame(loop);
+}
+
+requestAnimationFrame(loop);
+
+</script>
+</body>
+</html>

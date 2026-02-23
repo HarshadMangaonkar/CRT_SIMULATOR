@@ -7,19 +7,19 @@
 body{
   margin:0;
   font-family:Arial;
-  background:#f4f6fb;
+  background:#dacedf;
 }
 
-/* NAVBAR */
-nav{
-  width:300px;
-  margin:20px auto;
-  background:#2563eb;
-  padding:12px;
-  border-radius:12px;
-  display:flex;
-  justify-content:center;
-  gap:20px;
+
+nav {
+  width: 300px;
+  margin: 20px auto;
+  background: #7b1469;
+  padding: 12px;
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
 }
 nav a{
   color:white;
@@ -27,14 +27,14 @@ nav a{
   font-weight:bold;
 }
 
-/* APP BOX */
 .app{
   width:1000px;
   margin:auto;
   background:white;
-  padding:15px;
+  padding:35px;
   border-radius:12px;
   box-shadow:0 6px 20px rgba(0,0,0,0.1);
+  text-align: center;
 }
 
 .row{
@@ -43,16 +43,17 @@ nav a{
 }
 
 canvas{
-  background:#eef3ff;
-  border-radius:12px;
+  background:#bfb2c2;
+  border-radius:32px;
   border:2px solid #ccc;
 }
 
 .controls{
-  width:260px;
-  padding:12px;
-  background:#f1f5ff;
-  border-radius:10px;
+  width:360px;
+  padding:25px;
+  background:#bfb2c2;
+  border-radius:32px;
+
 }
 
 button{
@@ -61,7 +62,7 @@ button{
   margin-top:10px;
   border:none;
   border-radius:6px;
-  background:#2563eb;
+  background:#7b1469eb;
   color:white;
 }
 </style>
@@ -71,6 +72,7 @@ button{
 
 <nav>
   <a href="index.html">Home</a>
+  <a href="lab.html">Lab</a>
   <a href="theory.html">Theory</a>
 </nav>
 
@@ -83,15 +85,15 @@ button{
 <div class="controls">
 <label>Magnetic Field</label>
 <input id="bRange" type="range" min="-4" max="4" step="0.1" value="0.6">
-<div>B = <span id="bVal">0.6</span></div>
+<div>B = <span id="bVal">0.6</span></div><br>
 
-<label>Beam Speed</label>
+<label>Beam Speed</label><br>
 <input id="speedRange" type="range" min="100" max="600" step="10" value="320">
-<div>Speed = <span id="speedVal">320</span></div>
+<div>Speed = <span id="speedVal">320</span></div><br>
 
 <label>Emission Rate</label>
 <input id="rateRange" type="range" min="10" max="200" step="10" value="80">
-<div>Rate = <span id="rateVal">80</span></div>
+<div>Rate = <span id="rateVal">80</span></div><br>
 
 <button id="startBtn">Start</button>
 <button id="stopBtn">Stop</button>

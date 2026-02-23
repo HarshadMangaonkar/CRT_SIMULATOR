@@ -1,84 +1,74 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>CRT Oscilloscope Simulation</title>
+<title>Virtual CRT Oscilloscope</title>
 
 <style>
 body{
   margin:0;
   font-family:Arial, sans-serif;
-  background:#f4f6fb;
-  color:#333;
+  background:url("background.jpg") center/cover no-repeat fixed;
+  color:#05080e;
 }
 
-/* HEADER */
+/* TOP NAVBAR */
 header{
-  background:#2563eb;
+  background:#7b1469;
+  padding:15px 25px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
   color:white;
-  padding:20px 0;
+align-content: center;}
+
+header a{
+  color:rgb(0, 0, 0);
+  text-decoration:none;
+  margin-left:15px;
+  font-weight:bold;
+  text-align: center;
+}
+
+/* WELCOME AREA */
+.main{
   text-align:center;
-  box-shadow:0 2px 8px rgba(0,0,0,0.1);
+  padding:120px 20px 40px;
 }
 
-nav{
-  margin-top:8px;
+h1{
+  margin:0 0 10px;
+  font-size:52px;
 }
 
-nav a{
+.subtitle{
+  font-size:22px;
+}
+
+/* START BUTTON */
+.start-btn{
+  display:inline-block;
+  margin-top:30px;
+  padding:14px 40px;
+  font-size:18px;
+  background:#7b1469;
   color:white;
   text-decoration:none;
-  margin:0 15px;
-  font-weight:600;
-  padding:6px 10px;
   border-radius:6px;
 }
 
-nav a:hover{
-  background:rgba(255,255,255,0.2);
+/* ABOUT & FEATURES AT BOTTOM */
+.info-section{
+  margin-top:160px;   /* pushes section downward */
+  padding:40px 20px 80px;
+  display:flex;
+  justify-content:center;
+  gap:60px;
+  flex-wrap:wrap;
 }
 
-/* MAIN CONTAINER */
-.container{
-  width:800px;
-  margin:30px auto;
-}
-
-/* CARD STYLE */
-.card{
-  background:white;
-  padding:25px;
-  border-radius:12px;
-  margin-bottom:25px;
-  box-shadow:0 4px 12px rgba(0,0,0,0.08);
-  text-align:center;
-}
-
-.card h2, .card h3{
-  margin-top:0;
-}
-
-/* BUTTON */
-.start-btn{
-  display:inline-block;
-  margin-top:15px;
-  padding:10px 22px;
-  background:#2563eb;
-  color:white;
-  text-decoration:none;
-  border-radius:8px;
-  font-weight:bold;
-}
-
-.start-btn:hover{
-  background:#1e4ed8;
-}
-
-/* FEATURES LIST */
-.features{
-  text-align:left;
-  line-height:1.8;
-  max-width:400px;
-  margin:15px auto 0;
+.info-card{
+  width:320px;
+  line-height:1.7;
 }
 </style>
 </head>
@@ -86,42 +76,31 @@ nav a:hover{
 <body>
 
 <header>
-  <h1>Virtual CRT Oscilloscope</h1>
-  <nav>
-    <a href="#about">About</a>
-    <a href="#features">Features</a>
-  </nav>
+  <div>Virtual CRT Oscilloscope</div>
 </header>
 
-<div class="container">
+<div class="main">
+  <h1>Welcome</h1>
+  <div class="subtitle">CRT Oscilloscope Simulation</div>
+  <a class="start-btn" href="lab.html">Start Experiment</a>
+</div>
 
-  <div class="card">
-    <h2>Welcome to the Virtual CRT Oscilloscope Simulator</h2>
-    <p>
-      Explore the fundamentals of CRT oscilloscopes through an interactive simulation.
-      Adjust parameters, visualize waveforms, and understand electron beam deflection.
-    </p>
-    <a class="start-btn" href="lab.html">Start the Program</a>
-  </div>
+<div class="info-section">
 
-  <div id="about" class="card">
-    <h3>About the Project</h3>
+  <div class="info-card" id="about">
+    <h2>About</h2>
     <p>
-      A Cathode Ray Tube (CRT) oscilloscope helps students understand signal visualization,
-      electron emission, focusing, and deflection. Since real CRTs are outdated and fragile,
-      this virtual simulator provides a safe and interactive learning experience using web technology.
+      This virtual CRT oscilloscope helps students understand signal visualization,
+      electron beam motion, focusing, and deflection through simulation.
     </p>
   </div>
 
-  <div id="features" class="card">
-    <h3>Main Features</h3>
-    <div class="features">
-      • Real-time electron beam animation<br>
-      • Adjustable beam speed & intensity<br>
-      • Magnetic & electric deflection controls<br>
-      • Realistic physics-based simulation<br>
-      • Built using HTML, CSS & JavaScript
-    </div>
+  <div class="info-card">
+    <h2>Features</h2>
+    • Real-time waveform display<br>
+    • Adjustable beam speed<br>
+    • Magnetic & electric deflection<br>
+    • Interactive physics simulation
   </div>
 
 </div>

@@ -104,30 +104,30 @@ button{
 
 <script>
 
-/* ===== GET CANVAS ===== */
+/* = GET CANVAS = */
 let canvas = document.getElementById("crt");
 let ctx = canvas.getContext("2d");
 
 let W = canvas.width;
 let H = canvas.height;
 
-/* ===== DEVICE POSITIONS ===== */
+/* = DEVICE POSITIONS = */
 let gunX = 90;
 let gunY = H/2;
 
 let platesX = 200;
 let screenX = W - 40;
 
-/* ===== VALUES ===== */
+/* = VALUES = */
 let B = 0.6;
 let speed = 320;
 let rate = 80;
 let running = true;
 
-/* ===== PARTICLE LIST ===== */
+/* = PARTICLE LIST = */
 let particles = [];
 
-/* ===== CONTROLS ===== */
+/* = CONTROLS = */
 bRange.oninput = function(e){
   B = Number(e.target.value);
   bVal.textContent = B;
@@ -147,7 +147,7 @@ startBtn.onclick = function(){ running = true; };
 stopBtn.onclick = function(){ running = false; };
 resetBtn.onclick = function(){ particles = []; };
 
-/* ===== CREATE ELECTRON ===== */
+/* = CREATE ELECTRON = */
 function createParticle(){
   let p = {
     x: gunX,
@@ -158,7 +158,7 @@ function createParticle(){
   particles.push(p);
 }
 
-/* ===== MOVE ELECTRON ===== */
+/* = MOVE ELECTRON = */
 function updateParticle(p, dt){
 
   // apply deflection between plates
@@ -170,7 +170,7 @@ function updateParticle(p, dt){
   p.y = p.y + p.vy * dt;
 }
 
-/* ===== DRAW TUBE ===== */
+/* = DRAW TUBE = */
 function drawTube(){
   let neckEnd = platesX + 10;
 
@@ -190,7 +190,7 @@ function drawTube(){
   ctx.stroke();
 }
 
-/* ===== DRAW GUN ===== */
+/* = DRAW GUN = */
 function drawGun(){
   ctx.beginPath();
   ctx.arc(gunX, gunY, 5, 0, Math.PI*2);
@@ -198,14 +198,14 @@ function drawGun(){
   ctx.fill();
 }
 
-/* ===== DRAW PLATES ===== */
+/* = DRAW PLATES = */
 function drawPlates(){
   ctx.fillStyle = "#444";
   ctx.fillRect(platesX + 10, H/2 - 22, 100, 6);
   ctx.fillRect(platesX + 10, H/2 + 16, 100, 6);
 }
 
-/* ===== DRAW SCREEN ===== */
+/* = DRAW SCREEN = */
 function drawScreen(){
   ctx.beginPath();
   ctx.arc(screenX, H/2, 150, Math.PI/2, -Math.PI/2, true);
@@ -214,7 +214,7 @@ function drawScreen(){
   ctx.stroke();
 }
 
-/* ===== DRAW ELECTRONS ===== */
+/* = DRAW ELECTRONS = */
 function drawParticles(){
 
   // clip inside tube
@@ -233,7 +233,7 @@ function drawParticles(){
   ctx.restore();
 }
 
-/* ===== DRAW EVERYTHING ===== */
+/* = DRAW EVERYTHING = */
 function render(){
   ctx.clearRect(0,0,W,H);
   drawTube();
@@ -243,7 +243,7 @@ function render(){
   drawParticles();
 }
 
-/* ===== MAIN LOOP ===== */
+/*  = MAIN LOOP = */
 let lastTime = performance.now();
 let emitCounter = 0;
 

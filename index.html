@@ -3,72 +3,132 @@
 <head>
 <title>Virtual CRT Oscilloscope</title>
 
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&display=swap" rel="stylesheet">
+
 <style>
+
+html{
+  scroll-behavior:smooth;
+}
+
 body{
   margin:0;
-  font-family:Arial, sans-serif;
-  background:url("background.jpg") center/cover no-repeat fixed;
+  font-family:'Orbitron', sans-serif;
+  background:
+    linear-gradient(rgba(255,255,255,0.6), rgba(255,255,255,0.6)),
+    url("https://images.unsplash.com/photo-1518770660439-4636190af475") center/cover no-repeat fixed;
   color:#05080e;
 }
 
 
+/* HEADER */
 header{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
   background:#7b1469;
-  padding:15px 25px;
+  padding:15px 40px;
   display:flex;
   justify-content:space-between;
   align-items:center;
   color:white;
+  z-index:1000;
+  box-sizing:border-box;
 }
 
 header a{
-  color:rgb(0, 0, 0);
+  color:white;
   text-decoration:none;
-  margin-left:15px;
-  font-weight:bold;
+  margin-left:20px;
+  font-weight:600;
+  transition:0.3s;
+}
+
+header a:hover{
+  opacity:0.8;
 }
 
 
+/* MAIN */
 .main{
   text-align:center;
-  padding:120px 20px 40px;
+  padding:140px 20px 60px;
 }
 
 h1{
-  margin:0 0 10px;
+  margin:0 0 15px;
   font-size:52px;
+  animation:fadeUp 1s ease;
 }
 
 .subtitle{
-  font-size:22px;
+  font-size:20px;
+  animation:fadeUp 1.4s ease;
 }
 
 
+/* BUTTON */
 .start-btn{
   display:inline-block;
   margin-top:30px;
   padding:14px 40px;
-  font-size:18px;
+  font-size:16px;
   background:#7b1469;
   color:white;
   text-decoration:none;
   border-radius:6px;
+  transition:0.3s;
+}
+
+.start-btn:hover{
+  transform:translateY(-3px);
 }
 
 
+/* INFO SECTION */
 .info-section{
-  margin-top:160px;
+  margin-top:100px;   /* balanced spacing */
   padding:40px 20px 80px;
   display:flex;
   justify-content:center;
-  gap:60px;
+  gap:40px;
   flex-wrap:wrap;
 }
 
+
+/* CARDS */
 .info-card{
-  width:320px;
-  line-height:1.7;
+  width:340px;
+  line-height:1.9;
+  padding:25px;
+  background:rgba(255,255,255,0.95);
+  border-radius:10px;
+  transition:0.3s;
 }
+
+.info-card:hover{
+  transform:translateY(-8px);
+}
+
+h2{
+  margin-top:0;
+  color:#7b1469;
+}
+
+
+/* ANIMATION */
+@keyframes fadeUp{
+  from{
+    opacity:0;
+    transform:translateY(20px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
 </style>
 </head>
 
@@ -76,6 +136,10 @@ h1{
 
 <header>
   <div>Virtual CRT Oscilloscope</div>
+  <div>
+    <a href="lab.html">Lab</a>
+    <a href="theory.html">Theory</a>
+  </div>
 </header>
 
 <div class="main">
@@ -86,7 +150,7 @@ h1{
 
 <div class="info-section">
 
-  <div class="info-card" id="about">
+  <div class="info-card">
     <h2>About</h2>
     <p>
       This virtual CRT oscilloscope helps students understand signal visualization,

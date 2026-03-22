@@ -3,67 +3,114 @@
 <head>
 <title>CRT Oscilloscope Lab</title>
 
+<!-- ✅ FONT LINK (IMPORTANT) -->
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&display=swap" rel="stylesheet">
+
 <style>
 body{
   margin:0;
-  font-family:Arial;
-  background:#dacedf;
+  font-family:'Orbitron', sans-serif;
+  background:
+    linear-gradient(rgba(255,255,255,0.7), rgba(255,255,255,0.7)),
+    url("https://images.unsplash.com/photo-1518770660439-4636190af475") center/cover no-repeat fixed;
+  color:#05080e;
 }
 
 
+/* NAVBAR */
 nav {
-  width: 300px;
-  margin: 20px auto;
+  width: 320px;
+  margin: 25px auto;
   background: #7b1469;
-  padding: 12px;
+  padding: 14px;
   border-radius: 12px;
   display: flex;
   justify-content: center;
-  gap: 20px;
+  gap: 25px;
+  box-shadow:0 4px 12px rgba(0,0,0,0.2);
 }
+
 nav a{
   color:white;
   text-decoration:none;
-  font-weight:bold;
+  font-weight:600;
+  transition:0.3s;
 }
 
+nav a:hover{
+  opacity:0.8;
+}
+
+
+/* MAIN BOX */
 .app{
-  width:1000px;
+  width:1050px;
   margin:auto;
-  background:white;
+  background:rgba(255,255,255,0.95);
   padding:35px;
-  border-radius:12px;
-  box-shadow:0 6px 20px rgba(0,0,0,0.1);
+  border-radius:16px;
+  box-shadow:0 8px 25px rgba(0,0,0,0.2);
   text-align: center;
 }
 
+h2{
+  color:#7b1469;
+  margin-bottom:25px;
+}
+
+
+/* LAYOUT */
 .row{
   display:flex;
-  gap:15px;
+  gap:20px;
+  justify-content:center;
 }
 
+
+/* CANVAS */
 canvas{
-  background:#bfb2c2;
+  background:#d8cde0;
   border-radius:32px;
-  border:2px solid #ccc;
+  border:2px solid #bbb;
 }
 
+
+/* CONTROL PANEL */
 .controls{
   width:360px;
   padding:25px;
-  background:#bfb2c2;
+  background:rgba(255,255,255,0.9);
   border-radius:32px;
-
+  box-shadow:0 4px 15px rgba(0,0,0,0.15);
 }
 
+label{
+  font-size:14px;
+}
+
+input[type="range"]{
+  width:100%;
+  margin-top:5px;
+}
+
+
+/* BUTTONS */
 button{
   width:100%;
-  padding:8px;
-  margin-top:10px;
+  padding:10px;
+  margin-top:12px;
   border:none;
-  border-radius:6px;
-  background:#7b1469eb;
+  border-radius:8px;
+  background:#7b1469;
   color:white;
+  font-family:'Orbitron', sans-serif;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+button:hover{
+  transform:translateY(-2px);
+  background:#5a0f4d;
 }
 </style>
 </head>
@@ -160,17 +207,15 @@ function createParticle(){
 
 /* = MOVE ELECTRON = */
 function updateParticle(p, dt){
-
-  // apply deflection between plates
   if(p.x > platesX && p.x < platesX + 120){
     p.vy = p.vy - p.vx * B * dt;
   }
 
-  p.x = p.x + p.vx * dt;
-  p.y = p.y + p.vy * dt;
+  p.x += p.vx * dt;
+  p.y += p.vy * dt;
 }
 
-/* = DRAW TUBE = */
+/* = DRAW TUBE */
 function drawTube(){
   let neckEnd = platesX + 10;
 
@@ -190,7 +235,7 @@ function drawTube(){
   ctx.stroke();
 }
 
-/* = DRAW GUN = */
+/* = DRAW GUN */
 function drawGun(){
   ctx.beginPath();
   ctx.arc(gunX, gunY, 5, 0, Math.PI*2);
@@ -198,14 +243,14 @@ function drawGun(){
   ctx.fill();
 }
 
-/* = DRAW PLATES = */
+/* = DRAW PLATES */
 function drawPlates(){
   ctx.fillStyle = "#444";
   ctx.fillRect(platesX + 10, H/2 - 22, 100, 6);
   ctx.fillRect(platesX + 10, H/2 + 16, 100, 6);
 }
 
-/* = DRAW SCREEN = */
+/* = DRAW SCREEN */
 function drawScreen(){
   ctx.beginPath();
   ctx.arc(screenX, H/2, 150, Math.PI/2, -Math.PI/2, true);
@@ -214,16 +259,13 @@ function drawScreen(){
   ctx.stroke();
 }
 
-/* = DRAW ELECTRONS = */
+/* = DRAW ELECTRONS */
 function drawParticles(){
-
-  // clip inside tube
   ctx.save();
   drawTube();
   ctx.clip();
 
-  for(let i=0; i<particles.length; i++){
-    let p = particles[i];
+  for(let p of particles){
     ctx.beginPath();
     ctx.arc(p.x, p.y, 2, 0, Math.PI*2);
     ctx.fillStyle = "black";
@@ -233,7 +275,7 @@ function drawParticles(){
   ctx.restore();
 }
 
-/* = DRAW EVERYTHING = */
+/* = RENDER */
 function render(){
   ctx.clearRect(0,0,W,H);
   drawTube();
@@ -243,18 +285,16 @@ function render(){
   drawParticles();
 }
 
-/*  = MAIN LOOP = */
+/* LOOP */
 let lastTime = performance.now();
 let emitCounter = 0;
 
 function loop(now){
-
   let dt = (now - lastTime)/1000;
   lastTime = now;
 
   if(running){
-
-    emitCounter = emitCounter + dt * rate;
+    emitCounter += dt * rate;
 
     while(emitCounter > 1){
       createParticle();

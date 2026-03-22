@@ -1,65 +1,92 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>CRT Theory</title>
-
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            background-color: #dacedf;        }
-
-        nav {
-            width: 300px;
-            margin: 20px auto;
-            background: #7b1469;
-            padding: 12px;
-            border-radius: 12px;
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-        }
-
-        nav a{
-            color:white;
-            text-decoration:none;
-            font-weight:bold;
-        }
-
-        .container {
-            max-width: 900px;
-            margin: 30px auto;
-            padding: 20px;
-        }
+<title>CRT Theory</title>
 
 
-        .card {
-            background: white;
-            padding: 22px;
-            margin-bottom: 25px;
-            border-radius: 12px;
-        }
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&display=swap" rel="stylesheet">
 
-        h2 {
-            color: #000000;
-            margin-top: 0;
-        }
+<style>
+body {
+    margin: 0;
+    font-family: 'Orbitron', sans-serif;
+    background:
+      linear-gradient(rgba(255,255,255,0.7), rgba(255,255,255,0.7)),
+      url("https://images.unsplash.com/photo-1518770660439-4636190af475") center/cover no-repeat fixed;
+    color:#05080e;
+}
 
-        img {
-            width: 75%;
-            border-radius: 10px;
-            margin: 15px 0;
-            align-items: end;
-        }
+/* NAVBAR */
+nav {
+    width: 320px;
+    margin: 25px auto;
+    background: #7b1469;
+    padding: 14px;
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    box-shadow:0 4px 12px rgba(0,0,0,0.2);
+}
 
-        footer {
-            text-align: center;
-            padding: 15px;
-            background: #7b1469;
-            color: white;
-            margin-top: 40px;
-        }
-    </style>
+nav a{
+    color:white;
+    text-decoration:none;
+    font-weight:600;
+    transition:0.3s;
+}
+
+nav a:hover{
+    opacity:0.8;
+}
+
+
+/* MAIN CONTAINER */
+.container {
+    max-width: 950px;
+    margin: 30px auto;
+    padding: 20px;
+}
+
+
+/* CARDS */
+.card {
+    background: rgba(255,255,255,0.95);
+    padding: 25px;
+    margin-bottom: 25px;
+    border-radius: 16px;
+    box-shadow:0 6px 20px rgba(0,0,0,0.15);
+    transition:0.3s;
+}
+
+.card:hover{
+    transform:translateY(-5px);
+}
+
+h2 {
+    color: #7b1469;
+    margin-top: 0;
+}
+
+
+/* IMAGE */
+img {
+    width: 75%;
+    border-radius: 12px;
+    margin: 15px 0;
+}
+
+
+/* FOOTER */
+footer {
+    text-align: center;
+    padding: 18px;
+    background: #7b1469;
+    color: white;
+    margin-top: 40px;
+    font-size:14px;
+}
+</style>
 </head>
 
 <body>
@@ -69,7 +96,6 @@
   <a href="lab.html">Lab</a>
   <a href="theory.html">Theory</a>
 </nav>
-
 
 <div class="container">
 
@@ -92,23 +118,15 @@
     <div class="card">
         <h2>Main Parts of CRT</h2>
 
-        <img src="https://study.madeeasy.in/wp-content/uploads/2024/07/construction-crt.jpg" alt="CRT Diagram">
+        <img src="https://study.madeeasy.in/wp-content/uploads/2024/07/construction-crt.jpg">
 
         <p><b>Heater:</b> Heats the cathode to release electrons.</p>
-
         <p><b>Cathode:</b> Emits electrons through thermionic emission.</p>
-
         <p><b>Control Grid:</b> Controls the intensity and brightness of the beam.</p>
-
         <p><b>Accelerating Anodes:</b> Increase the speed of electrons.</p>
-
         <p><b>Focusing Anode:</b> Narrows the electron beam into a sharp line.</p>
-
-        <p><b>Deflection Plates:</b> Control the direction of the beam.
-        Vertical plates move it up and down, while horizontal plates move it left and right.</p>
-
-        <p><b>Fluorescent Screen:</b> Produces light when struck by electrons,
-        forming the visible waveform.</p>
+        <p><b>Deflection Plates:</b> Control the direction of the beam.</p>
+        <p><b>Fluorescent Screen:</b> Produces light when struck by electrons.</p>
     </div>
 
     <div class="card">
@@ -121,13 +139,12 @@
 
         <p>
             The beam then passes through deflection plates. Electrical signals applied
-            to these plates change the direction of the beam. This allows the oscilloscope
-            to represent voltage changes graphically.
+            to these plates change the direction of the beam.
         </p>
 
         <p>
-            Finally, the electron beam strikes the phosphor-coated screen. The impact
-            produces visible light, creating a waveform that represents the input signal.
+            Finally, the electron beam strikes the phosphor-coated screen and produces
+            visible light, creating a waveform.
         </p>
     </div>
 
@@ -135,15 +152,13 @@
         <h2>Conclusion</h2>
 
         <p>
-            The Cathode Ray Tube oscilloscope converts electrical signals into visible
-            waveforms using electron beam technology. It demonstrates important concepts
-            such as electron emission, acceleration, focusing, and deflection.
+            The CRT oscilloscope converts electrical signals into visible waveforms
+            using electron beam technology.
         </p>
 
         <p>
             A virtual CRT simulation helps students understand these principles clearly
-            without requiring real laboratory equipment, making learning interactive,
-            safe, and effective.
+            without real laboratory equipment.
         </p>
     </div>
 
@@ -155,4 +170,3 @@
 
 </body>
 </html>
-
